@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import P from 'prop-types';
 
 class Menu extends React.Component {
@@ -19,7 +19,7 @@ class Menu extends React.Component {
             <div className="menu">
                 <Link to="/home">首页</Link>|
                 <Link to="/features">构建与特性</Link>|
-                <Link to={{ pathname: '/tests', query: { t1: 123, t2: 'abc' } }}>测试页面</Link>|
+                <Link to={{ pathname: '/test', search: '?t1=abc&t2=123', query: { t3: 'aaa', t4: 'bbb'} }}>测试页面</Link>|
                 <a href="https://github.com/javaLuo/react-luo" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         );

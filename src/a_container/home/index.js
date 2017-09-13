@@ -6,7 +6,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import P from 'prop-types';
 
@@ -65,8 +64,6 @@ HomePageContainer.propTypes = {
 
 export default connect(
   (state) => ({
-    testvalue: state.app.inputvalue,
-    fetchValue: state.app.fetchvalue,
   }), 
   (dispatch) => ({
     actions: bindActionCreators({}, dispatch),

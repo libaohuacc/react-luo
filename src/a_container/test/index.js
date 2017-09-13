@@ -7,7 +7,7 @@
 import React from 'react';
 import P from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import { bindActionCreators } from 'redux';
 // ==================
@@ -55,6 +55,15 @@ class TestPageContainer extends React.Component {
         });
     }
 
+    /** 解析search参数 **/
+    analysisSearch(str) {
+        let arr = str.substr(1, str.length).split('&');
+        return arr.map((item) => {
+            const temp = item.split('=');
+            return { name: temp[0], value: temp[1] };
+        });
+    }
+
     componentDidMount() {
         // testPromise 测试。可以在此直接拿到结果。同时也会自动走reducer更新state
         // 传1将返回成功，其他数返回失败
@@ -65,6 +74,7 @@ class TestPageContainer extends React.Component {
         // });
     }
     render() {
+        // console.log('match、location对象：', this.props.match, this.props.location);
         return (
             <div className="page-test">
                 <h1 className="title">功能测试</h1>
@@ -102,7 +112,8 @@ class TestPageContainer extends React.Component {
                         <h2>location对象测试</h2>
                         <p>
                             当前路由：{ this.props.location.pathname }<br/>
-                            当前路由参数：{ Object.keys(this.props.location.query).map((v, i) => `${v}: ${this.props.location.query[v]}`).join('，') }
+                            当前路由Search参数：{ this.analysisSearch(this.props.location.search).map((item) => `${item.name}: ${item.value}`).join(', ') }<br/>
+                            当前路由query参数：{ this.props.location.query ? Object.keys(this.props.location.query).map((v, i) => `${v}: ${this.props.location.query[v]}`).join('，') : '' }
                         </p>
                     </div>
                     <div className="list">
@@ -135,6 +146,7 @@ TestPageContainer.propTypes = {
     num: P.number,
     location: P.any,
     actions: P.any,
+    match: P.any,
 };
 
 // ==================
