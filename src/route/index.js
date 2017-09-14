@@ -1,6 +1,7 @@
 import React from 'react';
-import { HashRouter as Router, Route, Redirect,Switch } from 'react-router-dom'; //BrowserRouter
+import { BrowserRouter as Router, Route, Redirect,Switch } from 'react-router-dom'; //BrowserRouter
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // ===================
 // Containers
@@ -16,11 +17,22 @@ import NotFoundContainer from '../a_container/notfound/index';
 // Exports
 // ===================
 
+
 class Routers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     };
+  }
+
+  /** 重定向 **/
+  requireAuth(container) {
+    return withRouter(class myApp extends React.Component {
+      
+      render() {
+        return container;
+      }
+    });
   }
 
   render() {
@@ -30,9 +42,9 @@ class Routers extends React.Component {
           <Switch>
             <Route exact path="/" component={HomeContainer}/>
             <Route exact path="/home" component={HomeContainer}/>
-            <Route exact path="/features" component={FeaturesContainer}/>
-            <Route exact path="/test" component={TestContainer}/>
-            <Route path="*" component={NotFoundContainer}/>
+            <Route exact path="/features" component={withRouter(FeaturesContainer)}/>
+            <Route exact path="/test" component={withRouter(TestContainer)}/>
+            <Route path="*" component={withRouter(NotFoundContainer)}/>
           </Switch>
         </div>
       </Router>

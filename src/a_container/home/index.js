@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import P from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 // ==================
 // 所需的所有组件
@@ -32,6 +33,9 @@ class HomePageContainer extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log('withRouter:', withRouter);
+  }
   render() {
     return (
       <div className="page-home">
@@ -56,6 +60,7 @@ class HomePageContainer extends React.Component {
 HomePageContainer.propTypes = {
   location: P.any,
   history: P.any,
+  router: P.any,
 };
 
 // ==================
