@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect,Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect,Switch } from 'react-router-dom'; //BrowserRouter
 import {connect} from 'react-redux';
 
 // ===================
